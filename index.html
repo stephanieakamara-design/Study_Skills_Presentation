@@ -3,67 +3,413 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Study Skills Presentation</title>
-    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@^2.0/dist/tailwind.min.css" rel="stylesheet">
+    <title>Roadmap to a Successful Group Presentation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
-        /* Your custom styles can go here */
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #f0f4f8 0%, #e6eef7 100%);
+            min-height: 100vh;
+        }
+        h1, h2, h3, .phase-title {
+            font-family: 'Outfit', sans-serif;
+        }
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.5);
+        }
+        .phase-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .phase-card:hover {
+            transform: translateY(-4px);
+        }
+        .task-card {
+            transition: all 0.3s ease;
+            border-left: 4px solid transparent;
+        }
+        .task-card:hover {
+            border-left-color: currentColor;
+            transform: translateX(8px);
+        }
+        .progress-line {
+            background: linear-gradient(to bottom, #3b82f6, #8b5cf6, #ec4899);
+        }
+        .icon-float {
+            animation: float 6s ease-in-out infinite;
+        }
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        .checklist-item {
+            transition: all 0.2s ease;
+        }
+        .checklist-item:hover {
+            background: rgba(59, 130, 246, 0.05);
+        }
+        .pulse-ring {
+            animation: pulse-ring 2s cubic-bezier(0.215, 0.61, 0.355, 1) infinite;
+        }
+        @keyframes pulse-ring {
+            0% { transform: scale(0.8); opacity: 0.5; }
+            100% { transform: scale(1.3); opacity: 0; }
+        }
+        .completed {
+            text-decoration: line-through;
+            opacity: 0.5;
+        }
     </style>
 </head>
-<body class="bg-gray-100">
-    <header class="bg-blue-500 p-4 text-white text-center">
-        <h1 class="text-2xl font-bold">Study Skills Presentation</h1>
+<body class="text-slate-800 p-4 md:p-8">
+
+    <!-- Header -->
+    <header class="max-w-6xl mx-auto mb-12 text-center relative">
+        <div class="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-32 bg-blue-400 rounded-full blur-3xl opacity-20"></div>
+        <h1 class="text-4xl md:text-6xl font-extrabold text-slate-900 mb-4 tracking-tight relative z-10">
+            Roadmap to a <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-violet-600">Successful</span><br>
+            Group Presentation
+        </h1>
+        <p class="text-lg text-slate-600 max-w-2xl mx-auto font-light">
+            A structured journey from research to delivery. Follow these phases to create compelling, well-researched presentations.
+        </p>
     </header>
-    <main class="p-4">
-        <section id="phase1" class="mb-8">
-            <h2 class="text-xl font-semibold">Phase 1 Tasks</h2>
-            <ul class="list-disc list-inside">
-                <li>Task 1: Introduction to Study Skills</li>
-                <li>Task 2: Time Management Techniques</li>
-                <li>Task 3: Effective Note Taking</li>
-            </ul>
+
+    <!-- Main Timeline Container -->
+    <main class="max-w-6xl mx-auto relative">
+        
+        <!-- Vertical Progress Line (Desktop) -->
+        <div class="hidden md:block absolute left-1/2 top-0 bottom-0 w-1 progress-line rounded-full transform -translate-x-1/2 opacity-30"></div>
+
+        <!-- Phase 1: Setup & Research -->
+        <section class="mb-16 relative">
+            <!-- Phase Badge -->
+            <div class="flex justify-center mb-8 relative">
+                <div class="glass-panel px-8 py-3 rounded-full shadow-lg border-2 border-blue-400/30 relative z-10">
+                    <span class="text-blue-600 font-bold tracking-wider text-sm uppercase">Phase 1</span>
+                    <h2 class="text-2xl font-bold text-slate-800 ml-2 inline">Setup & Research</h2>
+                </div>
+                <div class="absolute inset-0 bg-blue-400 rounded-full blur-xl opacity-20 pulse-ring"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 items-start">
+                <!-- Left Column -->
+                <div class="space-y-6 md:text-right md:pr-12">
+                    <!-- Task 1 -->
+                    <div class="task-card glass-panel p-6 rounded-2xl shadow-sm hover:shadow-xl cursor-pointer group text-blue-600">
+                        <div class="flex items-center md:justify-end gap-4 mb-3">
+                            <h3 class="text-xl font-bold text-slate-800 group-hover:text-blue-600 transition-colors">Form Groups & Assign Roles</h3>
+                            <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center text-2xl icon-float">
+                                👥
+                            </div>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-3">
+                            Select your group strategically, define specific member tasks based on strengths, and establish a clear Week 7 timeline with milestones.
+                        </p>
+                        <div class="flex flex-wrap gap-2 md:justify-end">
+                            <span class="px-3 py-1 bg-blue-50 text-blue-700 text-xs rounded-full font-medium">Team Building</span>
+                            <span class="px-3 py-1 bg-blue-50 text-blue-700 text-xs rounded-full font-medium">Planning</span>
+                        </div>
+                    </div>
+
+                    <!-- Task 2 -->
+                    <div class="task-card glass-panel p-6 rounded-2xl shadow-sm hover:shadow-xl cursor-pointer group text-emerald-600">
+                        <div class="flex items-center md:justify-end gap-4 mb-3">
+                            <h3 class="text-xl font-bold text-slate-800 group-hover:text-emerald-600 transition-colors">Investigate All Four Topics</h3>
+                            <div class="w-12 h-12 rounded-xl bg-emerald-100 flex items-center justify-center text-2xl icon-float" style="animation-delay: 1s;">
+                                🔍
+                            </div>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-3">
+                            Conduct comprehensive research on Global Warming, Plastic Oceans, Social Media Privacy, and Renewables using only credible, peer-reviewed sources.
+                        </p>
+                        <div class="grid grid-cols-2 gap-2 text-xs text-slate-500 mt-2">
+                            <div class="checklist-item p-2 rounded bg-emerald-50/50">🌍 Global Warming</div>
+                            <div class="checklist-item p-2 rounded bg-emerald-50/50">🌊 Plastic Oceans</div>
+                            <div class="checklist-item p-2 rounded bg-emerald-50/50">🔒 Social Media Privacy</div>
+                            <div class="checklist-item p-2 rounded bg-emerald-50/50">⚡ Renewables</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Center Node -->
+                <div class="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-blue-500 rounded-full border-4 border-white shadow-lg z-20"></div>
+
+                <!-- Right Column -->
+                <div class="space-y-6 md:pl-12">
+                    <!-- Task 3 -->
+                    <div class="task-card glass-panel p-6 rounded-2xl shadow-sm hover:shadow-xl cursor-pointer group text-violet-600">
+                        <div class="flex items-center gap-4 mb-3">
+                            <div class="w-12 h-12 rounded-xl bg-violet-100 flex items-center justify-center text-2xl icon-float" style="animation-delay: 2s;">
+                                🎯
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-800 group-hover:text-violet-600 transition-colors">Align with Learning Outcomes</h3>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-3">
+                            Ensure all research supports logical arguments (LO1) and demonstrates real-case scenario applications (LO3) for maximum academic impact.
+                        </p>
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-2 text-sm text-slate-600">
+                                <div class="w-2 h-2 rounded-full bg-violet-500"></div>
+                                <span>LO1: Logical Argumentation</span>
+                            </div>
+                            <div class="flex items-center gap-2 text-sm text-slate-600">
+                                <div class="w-2 h-2 rounded-full bg-violet-500"></div>
+                                <span>LO3: Real-world Application</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
-        <section id="phase2" class="mb-8">
-            <h2 class="text-xl font-semibold">Phase 2 Tasks</h2>
-            <ul class="list-disc list-inside">
-                <li>Task 1: Revising Techniques</li>
-                <li>Task 2: Exam Preparation Strategies</li>
-                <li>Task 3: Stress Management</li>
-            </ul>
+
+        <!-- Phase 2: Creation & Final Delivery -->
+        <section class="relative">
+            <!-- Phase Badge -->
+            <div class="flex justify-center mb-8 relative">
+                <div class="glass-panel px-8 py-3 rounded-full shadow-lg border-2 border-violet-400/30 relative z-10">
+                    <span class="text-violet-600 font-bold tracking-wider text-sm uppercase">Phase 2</span>
+                    <h2 class="text-2xl font-bold text-slate-800 ml-2 inline">Creation & Final Delivery</h2>
+                </div>
+                <div class="absolute inset-0 bg-violet-400 rounded-full blur-xl opacity-20 pulse-ring" style="animation-delay: 0.5s;"></div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-8 items-start">
+                <!-- Left Column -->
+                <div class="space-y-6 md:text-right md:pr-12">
+                    <!-- Task 4 -->
+                    <div class="task-card glass-panel p-6 rounded-2xl shadow-sm hover:shadow-xl cursor-pointer group text-amber-600">
+                        <div class="flex items-center md:justify-end gap-4 mb-3">
+                            <h3 class="text-xl font-bold text-slate-800 group-hover:text-amber-600 transition-colors">Build the 20-Slide Deck</h3>
+                            <div class="w-12 h-12 rounded-xl bg-amber-100 flex items-center justify-center text-2xl icon-float" style="animation-delay: 3s;">
+                                📊
+                            </div>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-3">
+                            Create 5 slides per topic incorporating visual aids, proper citations, and a comprehensive reference page. Focus on clarity and visual hierarchy.
+                        </p>
+                        <div class="flex items-center md:justify-end gap-2 text-sm font-semibold text-amber-700 bg-amber-50 px-4 py-2 rounded-lg">
+                            <span>20 Slides Total</span>
+                            <span class="text-amber-400">•</span>
+                            <span>5 per Topic</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Center Node -->
+                <div class="hidden md:flex absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 bg-violet-500 rounded-full border-4 border-white shadow-lg z-20"></div>
+
+                <!-- Right Column -->
+                <div class="space-y-6 md:pl-12">
+                    <!-- Task 5 -->
+                    <div class="task-card glass-panel p-6 rounded-2xl shadow-sm hover:shadow-xl cursor-pointer group text-rose-600">
+                        <div class="flex items-center gap-4 mb-3">
+                            <div class="w-12 h-12 rounded-xl bg-rose-100 flex items-center justify-center text-2xl icon-float" style="animation-delay: 4s;">
+                                🎤
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-800 group-hover:text-rose-600 transition-colors">Select & Practice the Best Segment</h3>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-3">
+                            Choose your strongest 5-slide topic for a 5-minute presentation. Ensure all members participate actively in delivery.
+                        </p>
+                        <div class="flex gap-2">
+                            <span class="px-3 py-1 bg-rose-50 text-rose-700 text-xs rounded-full font-medium">⏱️ 5 Minutes</span>
+                            <span class="px-3 py-1 bg-rose-50 text-rose-700 text-xs rounded-full font-medium">👥 All Members</span>
+                        </div>
+                    </div>
+
+                    <!-- Task 6 -->
+                    <div class="task-card glass-panel p-6 rounded-2xl shadow-sm hover:shadow-xl cursor-pointer group text-cyan-600">
+                        <div class="flex items-center gap-4 mb-3">
+                            <div class="w-12 h-12 rounded-xl bg-cyan-100 flex items-center justify-center text-2xl icon-float" style="animation-delay: 5s;">
+                                ☁️
+                            </div>
+                            <h3 class="text-xl font-bold text-slate-800 group-hover:text-cyan-600 transition-colors">Final Blackboard Submission</h3>
+                        </div>
+                        <p class="text-slate-600 text-sm leading-relaxed mb-3">
+                            Upload the complete 20-slide document to the Assignment 1 link on Blackboard before the deadline.
+                        </p>
+                        <div class="mt-3 p-3 bg-cyan-50 rounded-lg border border-cyan-200">
+                            <p class="text-xs text-cyan-800 font-medium flex items-center gap-2">
+                                <span class="text-lg">📤</span>
+                                Submit via Assignment 1 Portal
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
-        <section id="checklist" class="mb-8">
-            <h2 class="text-xl font-semibold">12-Item Checklist</h2>
-            <ul class="list-none">
-                <li><input type="checkbox" id="check1"> <label for="check1">Item 1</label></li>
-                <li><input type="checkbox" id="check2"> <label for="check2">Item 2</label></li>
-                <li><input type="checkbox" id="check3"> <label for="check3">Item 3</label></li>
-                <li><input type="checkbox" id="check4"> <label for="check4">Item 4</label></li>
-                <li><input type="checkbox" id="check5"> <label for="check5">Item 5</label></li>
-                <li><input type="checkbox" id="check6"> <label for="check6">Item 6</label></li>
-                <li><input type="checkbox" id="check7"> <label for="check7">Item 7</label></li>
-                <li><input type="checkbox" id="check8"> <label for="check8">Item 8</label></li>
-                <li><input type="checkbox" id="check9"> <label for="check9">Item 9</label></li>
-                <li><input type="checkbox" id="check10"> <label for="check10">Item 10</label></li>
-                <li><input type="checkbox" id="check11"> <label for="check11">Item 11</label></li>
-                <li><input type="checkbox" id="check12"> <label for="check12">Item 12</label></li>
-            </ul>
+
+        <!-- START CHECKLIST SECTION -->
+        <!-- Summary Checklist -->
+        <section class="mt-16 glass-panel rounded-3xl p-8 shadow-lg border border-slate-200">
+            <div class="flex items-center justify-between mb-6">
+                <h3 class="text-2xl font-bold text-slate-800 text-center flex-1">Quick Reference Checklist</h3>
+                <button id="exportBtn" class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-xs font-bold rounded-lg transition-colors">
+                    📋 Export Progress
+                </button>
+            </div>
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="space-y-3">
+                    <h4 class="font-semibold text-blue-600 uppercase text-xs tracking-wider">Phase 1 Deliverables</h4>
+                    <ul class="space-y-2 text-sm text-slate-600">
+                        <li class="flex items-center gap-2"><input type="checkbox" id="check1"> <label for="check1" class="cursor-pointer">Group formed & roles assigned</label></li>
+                        <li class="flex items-center gap-2"><input type="checkbox" id="check2"> <label for="check2" class="cursor-pointer">Week 7 timeline established</label></li>
+                        <li class="flex items-center gap-2"><input type="checkbox" id="check3"> <label for="check3" class="cursor-pointer">All 4 topics researched</label></li>
+                        <li class="flex items-center gap-2"><input type="checkbox" id="check4"> <label for="check4" class="cursor-pointer">LO1 & LO3 alignment checked</label></li>
+                    </ul>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="font-semibold text-violet-600 uppercase text-xs tracking-wider">Phase 2 Deliverables</h4>
+                    <ul class="space-y-2 text-sm text-slate-600">
+                        <li class="flex items-center gap-2"><input type="checkbox" id="check5"> <label for="check5" class="cursor-pointer">20-slide deck completed</label></li>
+                        <li class="flex items-center gap-2"><input type="checkbox" id="check6"> <label for="check6" class="cursor-pointer">Visual aids & citations added</label></li>
+                        <li class="flex items-center gap-2"><input type="checkbox" id="check7"> <label for="check7" class="cursor-pointer">5-slide segment selected</label></li>
+                        <li class="flex items-center gap-2"><input type="checkbox" id="check8"> <label for="check8" class="cursor-pointer">Presentation rehearsed</label></li>
+                    </ul>
+                </div>
+                <div class="space-y-3">
+                    <h4 class="font-semibold text-emerald-600 uppercase text-xs tracking-wider">Final Submission</h4>
+                    <ul class="space-y-2 text-sm text-slate-600">
+                        <li class="flex items-center gap-2"><input type="checkbox" id="check9"> <label for="check9" class="cursor-pointer">Document proofread</label></li>
+                        <li class="flex items-center gap-2"><input type="checkbox" id="check10"> <label for="check10" class="cursor-pointer">Uploaded to Blackboard</label></li>
+                        <li class="flex items-center gap-2"><input type="checkbox" id="check11"> <label for="check11" class="cursor-pointer">Assignment 1 link confirmed</label></li>
+                        <li class="flex items-center gap-2"><input type="checkbox" id="check12"> <label for="check12" class="cursor-pointer">Submission receipt saved</label></li>
+                    </ul>
+                </div>
+            </div>
         </section>
-        <button id="exportBtn" class="bg-green-500 text-white px-4 py-2 rounded">Export Progress</button>
+        <!-- END CHECKLIST SECTION -->
+
     </main>
+
+    <footer class="max-w-6xl mx-auto mt-12 text-center text-slate-400 text-sm pb-8">
+        <p>Enhanced Roadmap Design • Based on original assignment requirements</p>
+    </footer>
+
     <script>
-        // Local storage functionality
-        const exportBtn = document.getElementById('exportBtn');
-        exportBtn.addEventListener('click', function() {
-            // Get checkbox states
-            const checklist = [];
-            for (let i = 1; i <= 12; i++) {
-                checklist.push({
-                    item: `Item ${i}`,
-                    checked: document.getElementById(`check${i}`).checked
-                });
+        // Load checkbox states from localStorage
+        function loadCheckboxStates() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            checkboxes.forEach(checkbox => {
+                const isChecked = localStorage.getItem(checkbox.id) === 'true';
+                checkbox.checked = isChecked;
+                updateLabel(checkbox);
+            });
+        }
+
+        // Update label styling
+        function updateLabel(checkbox) {
+            const label = document.querySelector(`label[for="${checkbox.id}"]`);
+            if (label) {
+                if (checkbox.checked) {
+                    label.classList.add('completed');
+                } else {
+                    label.classList.remove('completed');
+                }
             }
-            // Save to localStorage
-            localStorage.setItem('checklist', JSON.stringify(checklist));
-            alert('Progress exported!');
+        }
+
+        // Save checkbox state to localStorage
+        function saveCheckboxState(event) {
+            const checkbox = event.target;
+            localStorage.setItem(checkbox.id, checkbox.checked);
+            updateLabel(checkbox);
+        }
+
+        // Export checked items as HTML code
+        function exportProgress() {
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+            let htmlCode = `<!-- START CHECKLIST SECTION -->\n<!-- Summary Checklist -->\n<section class="mt-16 glass-panel rounded-3xl p-8 shadow-lg border border-slate-200">\n    <div class="flex items-center justify-between mb-6">\n        <h3 class="text-2xl font-bold text-slate-800 text-center flex-1">Quick Reference Checklist</h3>\n        <button id="exportBtn" class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-xs font-bold rounded-lg transition-colors">\n            📋 Export Progress\n        </button>\n    </div>\n    <div class="grid md:grid-cols-3 gap-6">\n`;
+
+            const sections = [
+                { 
+                    title: 'Phase 1 Deliverables', 
+                    color: 'blue',
+                    ids: ['check1', 'check2', 'check3', 'check4'],
+                    labels: [
+                        'Group formed & roles assigned',
+                        'Week 7 timeline established',
+                        'All 4 topics researched',
+                        'LO1 & LO3 alignment checked'
+                    ]
+                },
+                { 
+                    title: 'Phase 2 Deliverables', 
+                    color: 'violet',
+                    ids: ['check5', 'check6', 'check7', 'check8'],
+                    labels: [
+                        '20-slide deck completed',
+                        'Visual aids & citations added',
+                        '5-slide segment selected',
+                        'Presentation rehearsed'
+                    ]
+                },
+                { 
+                    title: 'Final Submission', 
+                    color: 'emerald',
+                    ids: ['check9', 'check10', 'check11', 'check12'],
+                    labels: [
+                        'Document proofread',
+                        'Uploaded to Blackboard',
+                        'Assignment 1 link confirmed',
+                        'Submission receipt saved'
+                    ]
+                }
+            ];
+
+            sections.forEach(section => {
+                htmlCode += `        <div class="space-y-3">\n            <h4 class="font-semibold text-${section.color}-600 uppercase text-xs tracking-wider">${section.title}</h4>\n            <ul class="space-y-2 text-sm text-slate-600">\n`;
+                section.ids.forEach((id, index) => {
+                    const checkbox = document.getElementById(id);
+                    const checked = checkbox.checked ? 'checked' : '';
+                    htmlCode += `                <li class="flex items-center gap-2"><input type="checkbox" id="${id}" ${checked}> <label for="${id}" class="cursor-pointer">${section.labels[index]}</label></li>\n`;
+                });
+                htmlCode += `            </ul>\n        </div>\n`;
+            });
+
+            htmlCode += `    </div>\n</section>\n<!-- END CHECKLIST SECTION -->`;
+
+            const modal = document.createElement('div');
+            modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:9999;';
+            
+            const box = document.createElement('div');
+            box.style.cssText = 'background:white;padding:30px;border-radius:10px;max-width:700px;max-height:80vh;overflow-y:auto;';
+            box.innerHTML = `
+                <h3 style="margin-top:0;font-size:20px;font-weight:bold;">Updated Checklist HTML Code</h3>
+                <p style="color:#666;font-size:13px;margin-bottom:15px;">Copy this code and replace the checklist section in your index.html on GitHub:</p>
+                <textarea readonly style="width:100%;height:350px;padding:10px;border:1px solid #ddd;border-radius:5px;font-family:monospace;font-size:11px;box-sizing:border-box;">${htmlCode}</textarea>
+                <div style="margin-top:20px;display:flex;gap:10px;">
+                    <button onclick="navigator.clipboard.writeText(document.querySelector('textarea').value).then(()=>{alert('✅ Copied to clipboard!');this.parentElement.parentElement.parentElement.remove();})" style="flex:1;padding:12px;background:#3b82f6;color:white;border:none;border-radius:5px;cursor:pointer;font-weight:bold;font-size:14px;">📋 Copy to Clipboard</button>
+                    <button onclick="this.parentElement.parentElement.parentElement.remove()" style="flex:1;padding:12px;background:#e5e7eb;border:none;border-radius:5px;cursor:pointer;font-weight:bold;font-size:14px;">Close</button>
+                </div>
+            `;
+            modal.appendChild(box);
+            document.body.appendChild(modal);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCheckboxStates();
+
+            // Task card hover effects
+            document.querySelectorAll('.task-card').forEach(card => {
+                card.addEventListener('mouseenter', function() {
+                    this.style.zIndex = '10';
+                });
+                card.addEventListener('mouseleave', function() {
+                    this.style.zIndex = '1';
+                });
+            });
+
+            // Checkbox listeners
+            document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+                checkbox.addEventListener('change', saveCheckboxState);
+            });
+
+            // Export button
+            document.getElementById('exportBtn').addEventListener('click', exportProgress);
         });
     </script>
 </body>
