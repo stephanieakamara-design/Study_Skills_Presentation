@@ -293,8 +293,10 @@
         function loadCheckboxStates() {
             const checkboxes = document.querySelectorAll('input[type="checkbox"]');
             checkboxes.forEach(checkbox => {
-                const isChecked = localStorage.getItem(checkbox.id) === 'true';
-                checkbox.checked = isChecked;
+                const saved = localStorage.getItem(checkbox.id);
+                if (saved !== null) {
+                    checkbox.checked = saved === 'true';
+                }
                 updateLabel(checkbox);
             });
         }
