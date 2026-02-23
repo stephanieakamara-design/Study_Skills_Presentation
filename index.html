@@ -247,8 +247,8 @@
 <section class="mt-16 glass-panel rounded-3xl p-8 shadow-lg border border-slate-200">
     <div class="flex items-center justify-between mb-6">
         <h3 class="text-2xl font-bold text-slate-800 text-center flex-1">Quick Reference Checklist</h3>
-        <button id="exportBtn" class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-xs font-bold rounded-lg transition-colors">
-            📋 Export Progress
+        <button id="shareBtn" class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-xs font-bold rounded-lg transition-colors">
+            🔗 Share Progress
         </button>
     </div>
     <div class="grid md:grid-cols-3 gap-6">
@@ -289,14 +289,39 @@
     </footer>
 
     <script>
-        // Load checkbox states from localStorage
-        function loadCheckboxStates() {
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-            checkboxes.forEach(checkbox => {
-                const isChecked = localStorage.getItem(checkbox.id) === 'true';
-                checkbox.checked = isChecked;
-                updateLabel(checkbox);
+        // Build URL hash from current checkbox states
+        function updateUrlHash() {
+            const checked = [];
+            document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+                if (cb.checked) checked.push(cb.id);
             });
+            history.replaceState(null, '', '#' + checked.join(','));
+        }
+
+        // Load checkbox states: URL hash takes priority, then localStorage, then HTML defaults
+        function loadCheckboxStates() {
+            const hasHash = window.location.href.includes('#');
+            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+
+            if (hasHash) {
+                // Shared link: apply state from URL hash
+                const hash = window.location.hash.slice(1);
+                const checkedIds = hash ? hash.split(',') : [];
+                checkboxes.forEach(cb => {
+                    cb.checked = checkedIds.includes(cb.id);
+                });
+            } else {
+                // No hash: use localStorage if available, otherwise keep HTML defaults
+                checkboxes.forEach(cb => {
+                    const saved = localStorage.getItem(cb.id);
+                    if (saved !== null) {
+                        cb.checked = saved === 'true';
+                    }
+                });
+            }
+
+            checkboxes.forEach(cb => updateLabel(cb));
+            updateUrlHash();
         }
 
         // Update label styling
@@ -311,82 +336,31 @@
             }
         }
 
-        // Save checkbox state to localStorage
+        // Save checkbox state to localStorage and update URL hash
         function saveCheckboxState(event) {
             const checkbox = event.target;
             localStorage.setItem(checkbox.id, checkbox.checked);
             updateLabel(checkbox);
+            updateUrlHash();
         }
 
-        // Export checked items as HTML code
-        function exportProgress() {
-            const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-            let htmlCode = `<!-- START CHECKLIST SECTION -->\n<!-- Summary Checklist -->\n<section class="mt-16 glass-panel rounded-3xl p-8 shadow-lg border border-slate-200">\n    <div class="flex items-center justify-between mb-6">\n        <h3 class="text-2xl font-bold text-slate-800 text-center flex-1">Quick Reference Checklist</h3>\n        <button id="exportBtn" class="px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white text-xs font-bold rounded-lg transition-colors">\n            📋 Export Progress\n        </button>\n    </div>\n    <div class="grid md:grid-cols-3 gap-6">\n`;
-
-            const sections = [
-                { 
-                    title: 'Phase 1 Deliverables', 
-                    color: 'blue',
-                    ids: ['check1', 'check2', 'check3', 'check4'],
-                    labels: [
-                        'Group formed & roles assigned',
-                        'Week 7 timeline established',
-                        'All 4 topics researched',
-                        'LO1 & LO3 alignment checked'
-                    ]
-                },
-                { 
-                    title: 'Phase 2 Deliverables', 
-                    color: 'violet',
-                    ids: ['check5', 'check6', 'check7', 'check8'],
-                    labels: [
-                        '20-slide deck completed',
-                        'Visual aids & citations added',
-                        '5-slide segment selected',
-                        'Presentation rehearsed'
-                    ]
-                },
-                { 
-                    title: 'Final Submission', 
-                    color: 'emerald',
-                    ids: ['check9', 'check10', 'check11', 'check12'],
-                    labels: [
-                        'Document proofread',
-                        'Uploaded to Blackboard',
-                        'Assignment 1 link confirmed',
-                        'Submission receipt saved'
-                    ]
-                }
-            ];
-
-            sections.forEach(section => {
-                htmlCode += `        <div class="space-y-3">\n            <h4 class="font-semibold text-${section.color}-600 uppercase text-xs tracking-wider">${section.title}</h4>\n            <ul class="space-y-2 text-sm text-slate-600">\n`;
-                section.ids.forEach((id, index) => {
-                    const checkbox = document.getElementById(id);
-                    const checked = checkbox.checked ? 'checked' : '';
-                    htmlCode += `                <li class="flex items-center gap-2"><input type="checkbox" id="${id}" ${checked}> <label for="${id}" class="cursor-pointer">${section.labels[index]}</label></li>\n`;
-                });
-                htmlCode += `            </ul>\n        </div>\n`;
+        // Copy shareable link to clipboard
+        function shareProgress() {
+            const url = window.location.href;
+            navigator.clipboard.writeText(url).then(() => {
+                const btn = document.getElementById('shareBtn');
+                const original = btn.textContent;
+                btn.textContent = '✅ Link Copied!';
+                btn.classList.replace('bg-blue-500', 'bg-green-500');
+                btn.classList.replace('hover:bg-blue-600', 'hover:bg-green-600');
+                setTimeout(() => {
+                    btn.textContent = original;
+                    btn.classList.replace('bg-green-500', 'bg-blue-500');
+                    btn.classList.replace('hover:bg-green-600', 'hover:bg-blue-600');
+                }, 2000);
+            }).catch(() => {
+                prompt('Copy this link to share your progress:', url);
             });
-
-            htmlCode += `    </div>\n</section>\n<!-- END CHECKLIST SECTION -->`;
-
-            const modal = document.createElement('div');
-            modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.7);display:flex;align-items:center;justify-content:center;z-index:9999;';
-            
-            const box = document.createElement('div');
-            box.style.cssText = 'background:white;padding:30px;border-radius:10px;max-width:700px;max-height:80vh;overflow-y:auto;';
-            box.innerHTML = `
-                <h3 style="margin-top:0;font-size:20px;font-weight:bold;">Updated Checklist HTML Code</h3>
-                <p style="color:#666;font-size:13px;margin-bottom:15px;">Copy this code and replace the checklist section in your index.html on GitHub:</p>
-                <textarea readonly style="width:100%;height:350px;padding:10px;border:1px solid #ddd;border-radius:5px;font-family:monospace;font-size:11px;box-sizing:border-box;">${htmlCode}</textarea>
-                <div style="margin-top:20px;display:flex;gap:10px;">
-                    <button onclick="navigator.clipboard.writeText(document.querySelector('textarea').value).then(()=>{alert('✅ Copied to clipboard!');this.parentElement.parentElement.parentElement.remove();})" style="flex:1;padding:12px;background:#3b82f6;color:white;border:none;border-radius:5px;cursor:pointer;font-weight:bold;font-size:14px;">📋 Copy to Clipboard</button>
-                    <button onclick="this.parentElement.parentElement.parentElement.remove()" style="flex:1;padding:12px;background:#e5e7eb;border:none;border-radius:5px;cursor:pointer;font-weight:bold;font-size:14px;">Close</button>
-                </div>
-            `;
-            modal.appendChild(box);
-            document.body.appendChild(modal);
         }
 
         document.addEventListener('DOMContentLoaded', () => {
@@ -407,8 +381,8 @@
                 checkbox.addEventListener('change', saveCheckboxState);
             });
 
-            // Export button
-            document.getElementById('exportBtn').addEventListener('click', exportProgress);
+            // Share button
+            document.getElementById('shareBtn').addEventListener('click', shareProgress);
         });
     </script>
 </body>
